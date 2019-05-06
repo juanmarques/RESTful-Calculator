@@ -33,7 +33,7 @@ cd .\RESTful-Calculator\
 ./mvnw test
 
 ```
-####Endpoint
+#### Endpoint
 ```
 http://localhost:8080/api/calculator/add?firstValue=1&secondValue=1
 http://localhost:8080/api/calculator/divide?firstValue=1&secondValue=1
