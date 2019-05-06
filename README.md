@@ -10,7 +10,6 @@ docker run -d -p 8080:8080 calculator-api:latest to silent mode
 
 docker run -p 8080:8080 calculator-api:latest to listen the application
 
-Open your browser in http://localhost:8080
 ```
 
 #### Stop the container
@@ -25,8 +24,12 @@ cd .\RESTful-Calculator\
 
 ./mvnw spring-boot:run
 
-Open your browser in http://localhost:8080
 ```
+
+#### Run tests with maven
+cd .\RESTful-Calculator\
+
+./mvnw test
 
 ####Endpoint
 ```
@@ -35,7 +38,6 @@ http://localhost:8080/api/calculator/divide?firstValue=1&secondValue=1
 http://localhost:8080/api/calculator/multiply?firstValue=1&secondValue=1
 http://localhost:8080/api/calculator/subtract?firstValue=1&secondValue=1
 http://localhost:8080/api/calculator/fibbonachi/8
-
 ```
 #### Technologies
 
