@@ -3,6 +3,10 @@ info:
   description: RESTful-Calculator API to do some calculations
   version: "0.1"
   title: "RESTful-Calculator API "
+  contact:
+    name: Juan Marques
+    url: https://github.com/juanmarques/RESTful-Calculator
+    email: 1juanmarques@gmail.com
 tags:
   - name: calculator-controller
     description: Calculator Controller
@@ -13,28 +17,18 @@ paths:
         - calculator-controller
       summary: add
       operationId: addUsingGET
-      parameters:
-        - name: present
-          in: query
-          required: false
-          schema:
-            type: boolean
+      requestBody:
+        $ref: "#/components/requestBodies/Optional_ValuesDtO_"
       responses:
         "200":
           description: OK
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/CalculationResult"
             application/json:
               schema:
                 $ref: "#/components/schemas/CalculationResult"
         "400":
           description: Please enter a valid input
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/BadRequestException"
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequestException"
@@ -51,28 +45,18 @@ paths:
         - calculator-controller
       summary: divide
       operationId: divideUsingGET
-      parameters:
-        - name: present
-          in: query
-          required: false
-          schema:
-            type: boolean
+      requestBody:
+        $ref: "#/components/requestBodies/Optional_ValuesDtO_"
       responses:
         "200":
           description: OK
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/CalculationResult"
             application/json:
               schema:
                 $ref: "#/components/schemas/CalculationResult"
         "400":
           description: Please enter a valid input
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/BadRequestException"
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequestException"
@@ -100,12 +84,6 @@ paths:
         "200":
           description: OK
           content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  type: integer
-                  format: int32
             application/json:
               schema:
                 type: array
@@ -115,9 +93,6 @@ paths:
         "400":
           description: Please enter a valid input
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/BadRequestException"
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequestException"
@@ -134,28 +109,18 @@ paths:
         - calculator-controller
       summary: multiply
       operationId: multiplyUsingGET
-      parameters:
-        - name: present
-          in: query
-          required: false
-          schema:
-            type: boolean
+      requestBody:
+        $ref: "#/components/requestBodies/Optional_ValuesDtO_"
       responses:
         "200":
           description: OK
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/CalculationResult"
             application/json:
               schema:
                 $ref: "#/components/schemas/CalculationResult"
         "400":
           description: Please enter a valid input
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/BadRequestException"
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequestException"
@@ -172,28 +137,18 @@ paths:
         - calculator-controller
       summary: subtract
       operationId: subtractUsingGET
-      parameters:
-        - name: present
-          in: query
-          required: false
-          schema:
-            type: boolean
+      requestBody:
+        $ref: "#/components/requestBodies/Optional_ValuesDtO_"
       responses:
         "200":
           description: OK
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/CalculationResult"
             application/json:
               schema:
                 $ref: "#/components/schemas/CalculationResult"
         "400":
           description: Please enter a valid input
           content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/BadRequestException"
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequestException"
@@ -207,6 +162,13 @@ paths:
 servers:
   - url: //localhost:8080/
 components:
+  requestBodies:
+    Optional_ValuesDtO_:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Optional_ValuesDtO_"
+      description: values
   schemas:
     BadRequestException:
       type: object
@@ -265,3 +227,23 @@ components:
           items:
             $ref: "#/components/schemas/Throwable"
       title: Throwable
+    ValuesDtO:
+      type: object
+      properties:
+        firstValue:
+          $ref: "#/components/schemas/Optional_string_"
+        secondValue:
+          $ref: "#/components/schemas/Optional_string_"
+      title: ValuesDtO
+    Optional_ValuesDtO_:
+      type: object
+      properties:
+        present:
+          type: boolean
+      title: Optional«ValuesDtO»
+    Optional_string_:
+      type: object
+      properties:
+        present:
+          type: boolean
+      title: Optional«string»
