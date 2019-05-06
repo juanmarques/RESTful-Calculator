@@ -27,10 +27,12 @@ cd .\RESTful-Calculator\
 ```
 
 #### Run tests with maven
+```
 cd .\RESTful-Calculator\
 
 ./mvnw test
 
+```
 ####Endpoint
 ```
 http://localhost:8080/api/calculator/add?firstValue=1&secondValue=1

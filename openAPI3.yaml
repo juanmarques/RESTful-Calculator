@@ -1,0 +1,267 @@
+openapi: 3.0.0
+info:
+  description: RESTful-Calculator API to do some calculations
+  version: "0.1"
+  title: "RESTful-Calculator API "
+tags:
+  - name: calculator-controller
+    description: Calculator Controller
+paths:
+  /api/calculator/add:
+    get:
+      tags:
+        - calculator-controller
+      summary: add
+      operationId: addUsingGET
+      parameters:
+        - name: present
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/CalculationResult"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CalculationResult"
+        "400":
+          description: Please enter a valid input
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/calculator/divide:
+    get:
+      tags:
+        - calculator-controller
+      summary: divide
+      operationId: divideUsingGET
+      parameters:
+        - name: present
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/CalculationResult"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CalculationResult"
+        "400":
+          description: Please enter a valid input
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/api/calculator/fibbonachi/{series}":
+    get:
+      tags:
+        - calculator-controller
+      summary: fibbonachi
+      operationId: fibbonachiUsingGET
+      parameters:
+        - name: series
+          in: path
+          description: series
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+        "400":
+          description: Please enter a valid input
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/calculator/multiply:
+    get:
+      tags:
+        - calculator-controller
+      summary: multiply
+      operationId: multiplyUsingGET
+      parameters:
+        - name: present
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/CalculationResult"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CalculationResult"
+        "400":
+          description: Please enter a valid input
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/calculator/subtract:
+    get:
+      tags:
+        - calculator-controller
+      summary: subtract
+      operationId: subtractUsingGET
+      parameters:
+        - name: present
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/CalculationResult"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CalculationResult"
+        "400":
+          description: Please enter a valid input
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestException"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+servers:
+  - url: //localhost:8080/
+components:
+  schemas:
+    BadRequestException:
+      type: object
+      properties:
+        cause:
+          $ref: "#/components/schemas/Throwable"
+        localizedMessage:
+          type: string
+        message:
+          type: string
+        stackTrace:
+          type: array
+          items:
+            $ref: "#/components/schemas/StackTraceElement"
+        suppressed:
+          type: array
+          items:
+            $ref: "#/components/schemas/Throwable"
+      title: BadRequestException
+    CalculationResult:
+      type: object
+      properties:
+        result:
+          type: number
+      title: CalculationResult
+    StackTraceElement:
+      type: object
+      properties:
+        className:
+          type: string
+        fileName:
+          type: string
+        lineNumber:
+          type: integer
+          format: int32
+        methodName:
+          type: string
+        nativeMethod:
+          type: boolean
+      title: StackTraceElement
+    Throwable:
+      type: object
+      properties:
+        cause:
+          $ref: "#/components/schemas/Throwable"
+        localizedMessage:
+          type: string
+        message:
+          type: string
+        stackTrace:
+          type: array
+          items:
+            $ref: "#/components/schemas/StackTraceElement"
+        suppressed:
+          type: array
+          items:
+            $ref: "#/components/schemas/Throwable"
+      title: Throwable
