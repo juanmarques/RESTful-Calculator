@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 @RequestMapping("/api/calculator")
 public class CalculatorController {
 
-	private CalculatorService calculatorService;
+	private final CalculatorService calculatorService;
 
 	@Autowired
 	public CalculatorController(CalculatorService calculatorService) {
@@ -37,9 +37,9 @@ public class CalculatorController {
 					@ApiResponse(description = "The Calculator", content = @Content(schema = @Schema(implementation = ValuesDtO.class))),
 					@ApiResponse(responseCode = "400", description = "Please enter a valid input") }, operationId = "add")
 	@GetMapping(value = "/add")
-	public ResponseEntity<CalculationResult> add(Optional<ValuesDtO> values) {
+	public ResponseEntity<CalculationResult> add(ValuesDtO values) {
 
-		return ResponseEntity.ok().body(this.calculatorService.add(values));
+		return ResponseEntity.ok().body(this.calculatorService.add(Optional.ofNullable(values)));
 	}
 
 	@Operation(summary = "divide", tags = {
@@ -47,9 +47,9 @@ public class CalculatorController {
 					@ApiResponse(description = "The Calculator", content = @Content(schema = @Schema(implementation = ValuesDtO.class))),
 					@ApiResponse(responseCode = "400", description = "Please enter a valid input") }, operationId = "divide")
 	@GetMapping(value = "/divide")
-	public ResponseEntity<CalculationResult> divide(Optional<ValuesDtO> values) {
+	public ResponseEntity<CalculationResult> divide(ValuesDtO values) {
 
-		return ResponseEntity.ok().body(this.calculatorService.divide(values));
+		return ResponseEntity.ok().body(this.calculatorService.divide(Optional.ofNullable(values)));
 
 	}
 
@@ -58,29 +58,29 @@ public class CalculatorController {
 					@ApiResponse(description = "The Calculator", content = @Content(schema = @Schema(implementation = ValuesDtO.class))),
 					@ApiResponse(responseCode = "400", description = "Please enter a valid input") }, operationId = "multiply")
 	@GetMapping(value = "/multiply")
-	public ResponseEntity<CalculationResult> multiply(Optional<ValuesDtO> values) {
+	public ResponseEntity<CalculationResult> multiply(ValuesDtO values) {
 
-		return ResponseEntity.ok().body(this.calculatorService.multiply(values));
+		return ResponseEntity.ok().body(this.calculatorService.multiply(Optional.ofNullable(values)));
 
 	}
 
-	@Operation(summary = "substract", tags = {
+	@Operation(summary = "subtract", tags = {
 			"Calculator" }, description = "Returns a result, based on the values entered. or non numeric , negative numbers will simulate API error conditions", responses = {
 					@ApiResponse(description = "The Calculator", content = @Content(schema = @Schema(implementation = ValuesDtO.class))),
 					@ApiResponse(responseCode = "400", description = "Please enter a valid input") }, operationId = "subtract")
 	@GetMapping(value = "/subtract")
-	public ResponseEntity<CalculationResult> subtract(Optional<ValuesDtO> values) {
+	public ResponseEntity<CalculationResult> subtract(ValuesDtO values) {
 
-		return ResponseEntity.ok().body(this.calculatorService.subtract(values));
+		return ResponseEntity.ok().body(this.calculatorService.subtract(Optional.ofNullable(values)));
 	}
 
-	@Operation(summary = "fibbonachi", tags = {
+	@Operation(summary = "fibonacci", tags = {
 			"Calculator" }, description = "Returns a Fibonacci sequence up to the number entered. or non numeric , negative numbers will simulate API error conditions", responses = {
-					@ApiResponse(description = "The fibbonachi's serie", content = @Content(schema = @Schema(implementation = Integer.class))),
-					@ApiResponse(responseCode = "400", description = "Please enter a valid input") }, operationId = "fibbonachi")
-	@GetMapping(value = "/fibbonachi/{series}")
-	public ResponseEntity<List<Integer>> fibbonachi(@PathVariable Optional<String> series) {
-		return ResponseEntity.ok().body(this.calculatorService.fibbonachi(series));
+					@ApiResponse(description = "The fibonacci series", content = @Content(schema = @Schema(implementation = Integer.class))),
+					@ApiResponse(responseCode = "400", description = "Please enter a valid input") }, operationId = "fibonacci")
+	@GetMapping(value = "/fibonacci/{series}")
+	public ResponseEntity<List<Integer>> fibonacci(@PathVariable String series) {
+		return ResponseEntity.ok().body(this.calculatorService.fibonacci(Optional.ofNullable(series)));
 	}
 
 }

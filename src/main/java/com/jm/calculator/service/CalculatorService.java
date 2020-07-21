@@ -10,12 +10,14 @@ public interface CalculatorService {
 
 	CalculationResult add(Optional<ValuesDtO> values);
 
-	CalculationResult divide(Optional<ValuesDtO> values);
+	default CalculationResult divide(Optional<ValuesDtO> values) {
+		return null;
+	}
 
 	CalculationResult multiply(Optional<ValuesDtO> values);
 
 	CalculationResult subtract(Optional<ValuesDtO> values);
 
-	List<Integer> fibbonachi(Optional<String> series);
+	List<Integer> fibonacci(Optional<String> series);
 
 }

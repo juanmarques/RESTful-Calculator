@@ -11,6 +11,6 @@ public class BadRequestException extends NumberFormatException {
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5875017293268426173L;
 
 }

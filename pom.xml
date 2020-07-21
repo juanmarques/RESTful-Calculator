@@ -93,7 +93,6 @@
 							<goal>unpack</goal>
 						</goals>
 						<configuration>
-							<dockerDirectory>src/main/docker</dockerDirectory>
 							<artifactItems>
 								<artifactItem>
 									<groupId>${project.groupId}</groupId>

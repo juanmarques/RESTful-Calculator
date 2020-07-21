@@ -36,33 +36,32 @@ public class CalculatorIntegrationTest {
 	}
 
 	@Test
-	public void add() throws Exception {
+	public void add() {
 		CalculationResult result = this.rt.getForObject(this.baseUrl + "add?firstValue=150&secondValue=300",CalculationResult.class);
 		assertEquals(BigDecimal.valueOf(450.0), result.getResult());
 	}
 
 	@Test
-	public void divide() throws Exception {
+	public void divide() {
 		CalculationResult result = this.rt.getForObject(this.baseUrl + "divide?firstValue=150&secondValue=300",CalculationResult.class);
 		assertEquals(BigDecimal.valueOf(0.5), result.getResult());
 	}
 
 	@Test
-	public void multiply() throws Exception {
+	public void multiply() {
 		CalculationResult result = this.rt.getForObject(this.baseUrl + "multiply?firstValue=150.93&secondValue=99.92",CalculationResult.class);
 		assertEquals(BigDecimal.valueOf(15080.92), result.getResult());
 	}
 
 	@Test
-	public void subtract() throws Exception {
+	public void subtract() {
 		CalculationResult result = this.rt.getForObject(this.baseUrl + "subtract?firstValue=150.93&secondValue=99.92",CalculationResult.class);
 		assertEquals(BigDecimal.valueOf(51.00999450683594), result.getResult());
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
-	public void fibbonachi() throws Exception {
-		List<Integer> result = this.rt.getForObject(this.baseUrl + "fibbonachi/8",List.class);
+	public void fibonacci() {
+		List<?> result = this.rt.getForObject(this.baseUrl + "fibonacci/8",List.class);
 		assertEquals(Arrays.asList(1,1,2,3,5,8,13,21),result);
 	}
 

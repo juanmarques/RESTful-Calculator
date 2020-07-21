@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 @Configuration
 public class LoggingHandler {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Pointcut("within(com.jm.calculator.controller.*)")
 	public void controller() {

@@ -19,12 +19,13 @@ public class CalculatorServiceImpl implements CalculatorService {
 	@Override
 	public CalculationResult add(Optional<ValuesDtO> values) {
 
-		ValuesDtO checkValues = new ValuesDtO(values.get().getFirstValue(), values.get().getSecondValue());
+		ValuesDtO checkValues = new ValuesDtO(values.flatMap(ValuesDtO::getFirstValue),
+				values.flatMap(ValuesDtO::getSecondValue));
 
 		float firstValue = checkValues.getFirstValue().map(Float::parseFloat)
-				.orElseThrow(() -> new BadRequestException());
+				.orElseThrow(BadRequestException::new);
 		float secondValue = checkValues.getSecondValue().map(Float::parseFloat)
-				.orElseThrow(() -> new BadRequestException());
+				.orElseThrow(BadRequestException::new);
 
 		return new CalculationResult(BigDecimal.valueOf(firstValue).add(BigDecimal.valueOf(secondValue)));
 	}
@@ -32,12 +33,12 @@ public class CalculatorServiceImpl implements CalculatorService {
 	@Override
 	public CalculationResult divide(Optional<ValuesDtO> values) {
 
-		ValuesDtO checkValues = new ValuesDtO(values.get().getFirstValue(), values.get().getSecondValue());
+		ValuesDtO checkValues = new ValuesDtO(values.flatMap(ValuesDtO::getFirstValue), values.flatMap(ValuesDtO::getSecondValue));
 
 		float firstValue = checkValues.getFirstValue().map(Float::parseFloat)
-				.orElseThrow(() -> new BadRequestException());
+				.orElseThrow(BadRequestException::new);
 		float secondValue = checkValues.getSecondValue().map(Float::parseFloat)
-				.orElseThrow(() -> new BadRequestException());
+				.orElseThrow(BadRequestException::new);
 
 		return new CalculationResult(
 				BigDecimal.valueOf(firstValue).divide(BigDecimal.valueOf(secondValue), MathContext.DECIMAL32));
@@ -47,12 +48,12 @@ public class CalculatorServiceImpl implements CalculatorService {
 	@Override
 	public CalculationResult multiply(Optional<ValuesDtO> values) {
 
-		ValuesDtO checkValues = new ValuesDtO(values.get().getFirstValue(), values.get().getSecondValue());
+		ValuesDtO checkValues = new ValuesDtO(values.flatMap(ValuesDtO::getFirstValue), values.flatMap(ValuesDtO::getSecondValue));
 
 		float firstValue = checkValues.getFirstValue().map(Float::parseFloat)
-				.orElseThrow(() -> new BadRequestException());
+				.orElseThrow(BadRequestException::new);
 		float secondValue = checkValues.getSecondValue().map(Float::parseFloat)
-				.orElseThrow(() -> new BadRequestException());
+				.orElseThrow(BadRequestException::new);
 
 		return new CalculationResult(
 				BigDecimal.valueOf(firstValue).multiply(BigDecimal.valueOf(secondValue), MathContext.DECIMAL32));
@@ -61,24 +62,24 @@ public class CalculatorServiceImpl implements CalculatorService {
 	@Override
 	public CalculationResult subtract(Optional<ValuesDtO> values) {
 
-		ValuesDtO checkValues = new ValuesDtO(values.get().getFirstValue(), values.get().getSecondValue());
+		ValuesDtO checkValues = new ValuesDtO(values.flatMap(ValuesDtO::getFirstValue), values.flatMap(ValuesDtO::getSecondValue));
 
 		float firstValue = checkValues.getFirstValue().map(Float::parseFloat)
-				.orElseThrow(() -> new BadRequestException());
+				.orElseThrow(BadRequestException::new);
 		float secondValue = checkValues.getSecondValue().map(Float::parseFloat)
-				.orElseThrow(() -> new BadRequestException());
+				.orElseThrow(BadRequestException::new);
 
 		return new CalculationResult(BigDecimal.valueOf(firstValue).subtract(BigDecimal.valueOf(secondValue)));
 	}
 
 	@Override
-	public List<Integer> fibbonachi(Optional<String> series) {
-		int fibbonachiSeries = series.filter(str -> str.matches("(^\\d*\\.?\\d*[1-9]+\\d*$)|(^[1-9]+\\.?\\d*$)"))
-				.map(Integer::parseInt).orElseThrow(() -> new BadRequestException());
+	public List<Integer> fibonacci(Optional<String> series) {
+		int fibonacciSeries = series.filter(str -> str.matches("(^\\d*\\.?\\d*[1-9]+\\d*$)|(^[1-9]+\\.?\\d*$)"))
+				.map(Integer::parseInt).orElseThrow(BadRequestException::new);
 
 		return Stream
 				.iterate(new int[] { 1, 1 },i -> new int[] { i[1], i[0] + i[1] })
-				.limit(fibbonachiSeries)
+				.limit(fibonacciSeries)
 				.map(i -> i[0])
 				.collect(Collectors.toList());
 	}
